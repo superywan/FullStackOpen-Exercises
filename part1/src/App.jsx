@@ -7,14 +7,23 @@ const Header = props => {
   );
 };
 
+const Part = props => {
+  const { exercise } = props;
+  return (
+    <>
+      <p>
+        {exercise.name} {exercise.number}
+      </p>
+    </>
+  );
+};
+
 const Content = props => {
   const { exercises } = props;
   return (
     <div>
       {exercises.map(exercise => (
-        <p>
-          {exercise.name} {exercise.number}
-        </p>
+        <Part exercise={exercise} />
       ))}
     </div>
   );
@@ -32,7 +41,6 @@ const Total = props => {
 
 const App = () => {
   const course = "Half Stack application development";
-
   const exercises = [
     { name: "Fundamentals of React", number: 10 },
     { name: "Using props to pass data", number: 7 },
