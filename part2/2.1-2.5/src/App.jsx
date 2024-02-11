@@ -12,6 +12,13 @@ const Content = ({ parts }) => {
       {parts.map(part => (
         <Part part={part} />
       ))}
+      <p>
+        {" "}
+        <strong>
+          total of {parts.reduce((acc, current) => acc + current.exercises, 0)}{" "}
+          exercises
+        </strong>
+      </p>
     </div>
   );
 };
@@ -50,6 +57,7 @@ const App = () => {
         exercises: 14,
         id: 3,
       },
+      { name: "Redux", exercises: 11, id: 4 },
     ],
   };
 
