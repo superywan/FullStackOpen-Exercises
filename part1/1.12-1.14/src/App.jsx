@@ -23,6 +23,7 @@ const App = () => {
 
   const voteAnecdote = () => {
     const updatedVotes = { ...votes };
+
     if (selected in votes) {
       updatedVotes[selected] = updatedVotes[selected] + 1;
     } else {
