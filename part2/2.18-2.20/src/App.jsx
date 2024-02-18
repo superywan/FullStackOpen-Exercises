@@ -13,8 +13,11 @@ function App() {
       })
   }, [])
 
-  const handleSearchChange = event => {
-    setSearch(event.target.value)
+  const handleSearchChange = e => {
+    setSearch(e.target.value)
+  }
+  const handleCountryShow = countryName => {
+    setSearch(countryName)
   }
 
   const filteredCountries = countries.filter(country =>
@@ -40,7 +43,7 @@ function App() {
             <ul>
               {Object.entries(filteredCountries[0].languages).map(
                 ([, value]) => {
-                  return <li>{value}</li>
+                  return <li key={value}>{value}</li>
                 }
               )}
             </ul>
@@ -51,7 +54,14 @@ function App() {
           </div>
         ) : (
           filteredCountries.map(country => {
-            return <div key={country.name.common}>{country.name.common}</div>
+            return (
+              <div key={country.name.common}>
+                {country.name.common}{" "}
+                <button onClick={e => handleCountryShow(country.name.common)}>
+                  show
+                </button>
+              </div>
+            )
           })
         )}
       </div>
