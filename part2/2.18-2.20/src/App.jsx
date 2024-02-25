@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import countryService from "./services/country"
 import weatherService from "./services/weather"
 import { Country } from "./components/Country"
+import { Search } from "./components/Search"
 
 function App() {
   const [countries, setCountries] = useState([])
@@ -30,33 +31,31 @@ function App() {
   )
 
   if (filteredCountries.length === 1) {
-    return <Country country={filteredCountries[0]} weather={weather} />
+    return (
+      <div>
+        <Search search={search} handleSearchChange={handleSearchChange} />
+        <Country country={filteredCountries[0]} weather={weather} />
+      </div>
+    )
   }
 
   return (
     <div>
-      <div>
-        find countries{" "}
-        <input
-          type="text"
-          value={search}
-          onChange={e => handleSearchChange(e.target.value)}
-        />
-        {filteredCountries.length > 10 ? (
-          <div>Too many matches, specify another filter</div>
-        ) : (
-          filteredCountries.map(country => {
-            return (
-              <div key={country.name.common}>
-                {country.name.common}{" "}
-                <button onClick={e => handleSearchChange(country.name.common)}>
-                  show
-                </button>
-              </div>
-            )
-          })
-        )}
-      </div>
+      <Search search={search} handleSearchChange={handleSearchChange} />
+      {filteredCountries.length > 10 ? (
+        <div>Too many matches, specify another filter</div>
+      ) : (
+        filteredCountries.map(country => {
+          return (
+            <div key={country.name.common}>
+              {country.name.common}{" "}
+              <button onClick={e => handleSearchChange(country.name.common)}>
+                show
+              </button>
+            </div>
+          )
+        })
+      )}
     </div>
   )
 }
