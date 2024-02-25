@@ -50,6 +50,23 @@ app.delete("/api/persons/:id", (request, response) => {
     response.status(204).end()
 })
 
+app.post("/api/persons", (request, response) => {
+    const body = request.body
+    if (!body.name || [...persons.filter(p => p.name === body.name)].length > 0) {
+        return response.status(400).json({
+            error: "name must be unique"
+        })
+    }
+
+    const person = {
+        name: body.name,
+        number: body.number,
+        id: persons.length > 0 ? Math.max(...persons.map(p => p.id)) + 1 : 0
+    }
+    persons = persons.concat(person)
+    response.json(person)
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
