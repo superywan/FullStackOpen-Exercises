@@ -59,6 +59,7 @@ const App = () => {
           const updatedPersons = persons.filter(
             person => person.id != id
           )
+          console.log(updatedPersons)
           setPersons(updatedPersons)
         })
         .catch(error => {
