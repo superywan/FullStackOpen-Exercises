@@ -9,6 +9,7 @@ morgan.token("body", (req, res) => {
 
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+app.use(express.static(__dirname + '/dist'))
 app.use(cors())
 
 let persons = [
@@ -35,6 +36,7 @@ let persons = [
 ]
 
 app.get("/info", (request, response) => {
+    console.log(__dirname + '/dist')
     response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${new Date().toString()}</p>`)
 })
 
